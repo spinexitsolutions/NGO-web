@@ -132,3 +132,5 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
 }
+
+html[data-intro-seen] .intro-overlay { display: none; }

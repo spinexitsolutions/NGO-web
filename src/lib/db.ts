@@ -16,29 +16,42 @@ const g = globalThis as unknown as { __ummeedDb?: DB; __ummeedDir?: string; __um
 
 const candidates = () => [process.env.DATA_DIR || path.join(process.cwd(), "data"), path.join("/tmp", "ummeed-data")];
 
-async function resolveDir(): Promise<string> {
-  if (g.__ummeedDir) return g.__ummeedDir;
-  for (const dir of candidates()) {
-    try {
-      await fs.mkdir(dir, { recursive: true });
-      const probe = path.join(dir, ".write-test");
-      await fs.writeFile(probe, "ok");
-      await fs.unlink(probe);
-      g.__ummeedDir = dir;
-      return dir;
-    } catch {
-      /* try next */
+let dirPromise: Promise<string> | null = null;
+
+function resolveDir(): Promise<string> {
+  if (g.__ummeedDir) return Promise.resolve(g.__ummeedDir);
+  dirPromise ??= (async () => {
+    for (const dir of candidates()) {
+      try {
+        await fs.mkdir(dir, { recursive: true });
+        const probe = path.join(dir, `.write-test-${process.pid}-${Math.random().toString(36).slice(2)}`);
+        await fs.writeFile(probe, "ok");
+        await fs.unlink(probe).catch(() => {});
+        g.__ummeedDir = dir;
+        return dir;
+      } catch {
+        /* try next */
+      }
     }
-  }
-  throw new Error("No writable data directory available");
+    dirPromise = null;
+    throw new Error("No writable data directory available");
+  })();
+  return dirPromise;
 }
 
 export async function dataDir() {
   return resolveDir();
 }
 
+let loadPromise: Promise<DB> | null = null;
+
 export async function getDb(): Promise<DB> {
   if (g.__ummeedDb) return g.__ummeedDb;
+  loadPromise ??= load().finally(() => (loadPromise = null));
+  return loadPromise;
+}
+
+async function load(): Promise<DB> {
   const dir = await resolveDir();
   const file = path.join(dir, "db.json");
   try {
@@ -50,7 +63,7 @@ export async function getDb(): Promise<DB> {
     g.__ummeedDb = createSeed();
     await persist(g.__ummeedDb);
   }
-  return g.__ummeedDb;
+  return g.__ummeedDb!;
 }
 
 async function persist(db: DB) {

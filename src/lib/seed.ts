@@ -300,7 +300,7 @@ export function createSeed(): DB {
         "Ummeed began in 2011 with a borrowed room, eleven children and one blackboard in Dharavi. Today we are 640 people strong, working in 14 states — but we still measure ourselves one child, one family, one village at a time.",
       mission:
         "To build lasting, community-owned systems for education, health, nutrition and climate resilience in India's most underserved regions.",
-      vision: "An India where where you're born never decides how far you go.",
+      vision: "An India where your birthplace never decides how far you go.",
       story:
         "Our founder, Meera Iyer, was a schoolteacher who noticed that the brightest girl in her class stopped coming after Class 6. The reason was a 9 km walk and no toilet at school. Meera raised ₹40,000 from neighbours, bought cycles, and built a toilet. The girl — Sunita — is now a civil engineer. That is the Ummeed model: find the real barrier, remove it, and stay until the community can carry it forward on its own.",
       image: img(P.teamOrange, 1800),
