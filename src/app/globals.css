@@ -1,29 +1,39 @@
 @import "tailwindcss";
 
-/* ─── Design tokens ─────────────────────────────────────── */
+/* ─── Design tokens ─────────────────────────────────────────
+   Ummeed v2 — "Field notes" system
+   Deep forest + electric lime, Bricolage Grotesque display,
+   Geist text, Geist Mono for meta. Sans-serif only.
+   ─────────────────────────────────────────────────────────── */
 @theme {
-  --color-paper: #f4f1ea;
-  --color-paper-2: #ebe6db;
-  --color-ink: #0e0e0c;
-  --color-ink-2: #2a2a26;
-  --color-muted: #6f6c64;
-  --color-line: rgb(14 14 12 / 0.1);
-  --color-card: #ffffff;
-  --color-night: #0b0b0a;
-  --color-accent: var(--accent, #ff4d1c);
-  --color-accent-soft: color-mix(in oklab, var(--accent, #ff4d1c) 14%, white);
+  --color-paper: #f2f1ec;
+  --color-paper-2: #e6e5de;
+  --color-ink: #0c0e0c;
+  --color-ink-2: #23271f;
+  --color-muted: #676a63;
+  --color-line: rgb(12 14 12 / 0.12);
+  --color-card: #fbfbf8;
+  --color-night: #0b2219;        /* deep forest — every dark section */
+  --color-forest: #12352a;
+  --color-moss: #1d4a3a;
+  --color-accent: var(--accent, #c6f24e);          /* electric lime — fills & dark bgs */
+  --color-accent-ink: color-mix(in oklab, var(--accent, #c6f24e) 30%, #0b3a28); /* text-safe on light */
+  --color-accent-soft: color-mix(in oklab, var(--accent, #c6f24e) 22%, white);
+  --color-lilac: #c9c2ff;
+  --color-sky: #bfe3ff;
 
-  --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snap: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --radius-xl2: 1.75rem;
-  --radius-xl3: 2.25rem;
+  --radius-xl2: 0.875rem;
+  --radius-xl3: 1.125rem;
 
-  --animate-marquee: marquee 40s linear infinite;
-  --animate-spin-slow: spin 14s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slow: spin 16s linear infinite;
 }
 
 @keyframes marquee {
@@ -33,7 +43,7 @@
 
 /* ─── Base ──────────────────────────────────────────────── */
 :root {
-  --accent: #ff4d1c;
+  --accent: #c6f24e;
   color-scheme: light;
 }
 
@@ -47,10 +57,14 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "ss01", "ss02";
 }
 
-::selection { background: var(--color-accent); color: white; }
+::selection { background: var(--color-accent); color: var(--color-ink); }
+
+@media (pointer: fine) {
+  html.has-cursor, html.has-cursor * { cursor: none !important; }
+}
 
 /* Lenis */
 html.lenis, html.lenis body { height: auto; }
@@ -60,42 +74,50 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ─── Type utilities ────────────────────────────────────── */
 @utility display {
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "opsz" 96, "wdth" 100;
   letter-spacing: -0.045em;
-  line-height: 0.92;
+  line-height: 0.9;
 }
+/* the "accent word" treatment — sans only: hairline weight against bold */
 @utility serif-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 250;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.05em;
 }
 @utility eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+@utility mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
 }
 @utility container-x {
   width: 100%;
   margin-inline: auto;
-  max-width: 88rem;
-  padding-inline: 1.25rem;
-  @media (min-width: 768px) { padding-inline: 2.5rem; }
+  max-width: 92rem;
+  padding-inline: 1rem;
+  @media (min-width: 768px) { padding-inline: 2rem; }
 }
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 }
 @utility glass {
-  background: rgb(255 255 255 / 0.62);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgb(250 250 246 / 0.72);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
 }
 @utility glass-dark {
-  background: rgb(14 14 12 / 0.72);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgb(11 34 25 / 0.78);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
 }
 @utility grain {
   position: relative;
@@ -104,25 +126,61 @@ html.lenis, html.lenis body { height: auto; }
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.08;
+    opacity: 0.12;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
+}
+/* dotted field-notebook grid used behind some sections */
+@utility dots {
+  background-image: radial-gradient(rgb(12 14 12 / 0.13) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@utility dots-dark {
+  background-image: radial-gradient(rgb(242 241 236 / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 /* Form controls shared by site + admin */
 @utility field {
   width: 100%;
-  border-radius: 0.9rem;
+  border-radius: 0.7rem;
   border: 1px solid var(--color-line);
   background: white;
-  padding: 0.8rem 1rem;
+  padding: 0.85rem 1rem;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  &:focus { border-color: var(--color-ink); box-shadow: 0 0 0 4px rgb(14 14 12 / 0.06); }
-  &::placeholder { color: #a3a09a; }
+  &:focus { border-color: var(--color-ink); box-shadow: 0 0 0 4px rgb(12 14 12 / 0.06); }
+  &::placeholder { color: #a2a49d; }
 }
+
+/* custom range slider */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-accent) var(--p, 50%), rgb(12 14 12 / 0.1) var(--p, 50%));
+  outline: none;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px; height: 28px; border-radius: 999px;
+  background: var(--color-ink);
+  border: 5px solid var(--color-accent);
+  box-shadow: 0 6px 18px -6px rgb(0 0 0 / 0.5);
+  transition: transform 0.2s;
+}
+.range::-webkit-slider-thumb:active { transform: scale(1.15); }
+.range::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 999px;
+  background: var(--color-ink);
+  border: 5px solid var(--color-accent);
+}
+
+html[data-intro-seen] .intro-overlay { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -132,5 +190,3 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
 }
-
-html[data-intro-seen] .intro-overlay { display: none; }

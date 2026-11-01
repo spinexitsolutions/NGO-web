@@ -24,7 +24,7 @@ export default function EventList({ events }: { events: EventItem[] }) {
       }}
       onMouseLeave={() => setActive(null)}
     >
-      <ul className="border-t border-line">
+      <ul className="border-t border-ink/15">
         {events.map((ev, i) => {
           const d = new Date(ev.date);
           return (
@@ -34,13 +34,13 @@ export default function EventList({ events }: { events: EventItem[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
-              className="border-b border-line"
+              className="border-b border-ink/15"
               onMouseEnter={() => setActive(i)}
             >
-              <Link href={`/events/${ev.slug}`} className="group grid grid-cols-[4.5rem_1fr_auto] items-center gap-4 py-6 md:grid-cols-[7rem_1fr_16rem_auto] md:gap-8 md:py-8">
+              <Link href={`/events/${ev.slug}`} data-cursor="Join" className="group grid grid-cols-[4.5rem_1fr_auto] items-center gap-4 py-6 md:grid-cols-[7rem_1fr_16rem_auto] md:gap-8 md:py-8">
                 <div className="leading-none">
                   <p className="display text-5xl md:text-6xl">{d.getDate().toString().padStart(2, "0")}</p>
-                  <p className="eyebrow mt-2 text-muted">{d.toLocaleDateString("en-IN", { month: "short", year: "2-digit" })}</p>
+                  <p className="mono mt-2 text-xs uppercase text-muted">{d.toLocaleDateString("en-IN", { month: "short", year: "2-digit" })}</p>
                 </div>
                 <div className="min-w-0">
                   <h3 className="display text-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2 md:text-4xl">{ev.title}</h3>
@@ -54,7 +54,7 @@ export default function EventList({ events }: { events: EventItem[] }) {
                   {ev.location}
                   <span className="mt-1 block pl-5">{ev.time}</span>
                 </p>
-                <span className="grid size-11 place-items-center rounded-full ring-1 ring-ink/15 transition-all duration-500 group-hover:rotate-45 group-hover:bg-accent group-hover:text-white group-hover:ring-accent md:size-14">
+                <span className="grid size-11 place-items-center rounded-xl ring-1 ring-ink/15 transition-all duration-500 group-hover:bg-accent group-hover:text-ink group-hover:ring-accent md:size-14">
                   <ArrowUpRight className="size-5" />
                 </span>
               </Link>

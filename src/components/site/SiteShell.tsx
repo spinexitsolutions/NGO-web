@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { IntroSettings, NavItem, SiteSettings } from "@/lib/types";
 import Intro from "./Intro";
-import Navbar from "./Navbar";
+import Navbar, { type Ticker } from "./Navbar";
+import Cursor from "./Cursor";
 
 type Ctx = {
   introDone: boolean;
@@ -21,11 +22,13 @@ export default function SiteShell({
   settings,
   intro,
   nav,
+  ticker,
 }: {
   children: ReactNode;
   settings: Pick<SiteSettings, "name" | "shortName" | "email" | "phone" | "socials" | "donateLabel" | "announcement">;
   intro: IntroSettings;
   nav: NavItem[];
+  ticker: Ticker;
 }) {
   const [introDone, setIntroDone] = useState(!intro.enabled);
   const lenis = useRef<Lenis | null>(null);
@@ -33,7 +36,7 @@ export default function SiteShell({
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const l = new Lenis({ lerp: 0.1, wheelMultiplier: 1, autoRaf: true });
+    const l = new Lenis({ lerp: 0.085, wheelMultiplier: 0.95, autoRaf: true });
     lenis.current = l;
     return () => {
       l.destroy();
@@ -60,7 +63,8 @@ export default function SiteShell({
   return (
     <SiteCtx.Provider value={{ introDone, lenis, lock }}>
       {intro.enabled && <Intro intro={intro} name={settings.shortName} onDone={() => setIntroDone(true)} />}
-      <Navbar settings={settings} nav={nav.filter((n) => n.visible)} />
+      <Cursor />
+      <Navbar settings={settings} nav={nav.filter((n) => n.visible)} ticker={ticker} />
       {children}
     </SiteCtx.Provider>
   );

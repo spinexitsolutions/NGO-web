@@ -40,7 +40,7 @@ export default async function EventPage({ params }: Props) {
               const I = Icon as typeof Clock;
               return (
                 <div key={i} className="rounded-2xl bg-card p-5 ring-1 ring-ink/5">
-                  <I className="size-5 text-accent" />
+                  <I className="size-5 text-accent-ink" />
                   <p className="mt-4 font-semibold">{text as string}</p>
                 </div>
               );

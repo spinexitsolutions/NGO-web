@@ -222,7 +222,7 @@ export function createSeed(): DB {
       tagline: "Hope, built by hand.",
       description:
         "Ummeed is an Indian non-profit working across 14 states to put children in classrooms, food on plates, clean water in villages and dignity back into everyday life.",
-      accent: "#FF4D1C",
+      accent: "#C6F24E",
       email: "hello@ummeed.org",
       phone: "+91 22 4012 7788",
       address: "3rd Floor, Kamala Mills Compound, Lower Parel, Mumbai 400013",
@@ -324,7 +324,7 @@ export function createSeed(): DB {
         id: "prg_1", slug: "education", title: "Education", category: "Learning",
         summary: "312 learning centres bridging the gap between school and real understanding.",
         body: "Our learning centres run after school hours in community spaces. Trained local tutors — 70% of them women — work with small groups using activity-based methods in the child's home language.\n\nWe track every child's reading and numeracy level each quarter, and work with government schools to share what works. Since 2011, 1.1 lakh children have completed our foundational literacy programme.\n\n## What your support funds\n\nTutor stipends, learning kits, digital libraries, and scholarships for girls to continue into secondary school.",
-        image: img(P.kidsDesk, 1800), color: "#FF4D1C", beneficiaries: 112000, locations: 312, featured: true, status: "published",
+        image: img(P.kidsDesk, 1800), color: "#C6F24E", beneficiaries: 112000, locations: 312, featured: true, status: "published",
       },
       {
         id: "prg_2", slug: "health", title: "Health", category: "Care",

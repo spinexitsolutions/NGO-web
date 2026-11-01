@@ -25,7 +25,7 @@ export default function Newsletter({ dark = true }: { dark?: boolean }) {
 
   return (
     <form onSubmit={submit} className="w-full">
-      <div className={cn("flex items-center gap-2 rounded-full p-1.5 ring-1 transition-shadow focus-within:ring-2", dark ? "bg-paper/5 ring-paper/15 focus-within:ring-accent" : "bg-white ring-ink/10 focus-within:ring-ink")}>
+      <div className={cn("flex items-center gap-2 rounded-xl2 p-1.5 ring-1 transition-shadow focus-within:ring-2", dark ? "bg-paper/5 ring-paper/15 focus-within:ring-accent" : "bg-white ring-ink/10 focus-within:ring-ink")}>
         <input
           type="email"
           required
@@ -41,7 +41,7 @@ export default function Newsletter({ dark = true }: { dark?: boolean }) {
         <button
           type="submit"
           disabled={state === "loading"}
-          className="grid size-11 shrink-0 place-items-center rounded-full bg-accent text-white transition-transform hover:scale-105 active:scale-95"
+          className="grid size-11 shrink-0 place-items-center rounded-[0.6rem] bg-accent text-ink transition-transform hover:scale-105 active:scale-95"
           aria-label="Subscribe"
         >
           {state === "loading" ? <Loader2 className="size-4 animate-spin" /> : state === "done" ? <Check className="size-4" /> : <ArrowRight className="size-4" />}
@@ -49,7 +49,7 @@ export default function Newsletter({ dark = true }: { dark?: boolean }) {
       </div>
       <AnimatePresence>
         {(state === "done" || state === "error") && (
-          <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className={cn("mt-3 px-4 text-sm", state === "error" ? "text-accent" : dark ? "text-paper/60" : "text-muted")}>
+          <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className={cn("mt-3 px-4 text-sm", state === "error" ? "text-red-400" : dark ? "text-paper/60" : "text-muted")}>
             {state === "done" ? "You're in. One good story, every month — no spam." : error}
           </motion.p>
         )}

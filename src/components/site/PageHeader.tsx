@@ -1,6 +1,11 @@
+import Link from "next/link";
 import SmartImage from "@/components/ui/SmartImage";
-import { Parallax, Reveal, SplitWords } from "./motion";
+import { ImageReveal, Mark, Reveal, SplitWords } from "./motion";
 
+/**
+ * Inner-page header: a forest-green block with a notebook-dot field,
+ * breadcrumb meta, a huge title and an image that overlaps into the page.
+ */
 export default function PageHeader({
   eyebrow,
   title,
@@ -17,36 +22,49 @@ export default function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <header className="container-x pt-36 md:pt-44">
-      <Reveal>
-        <p className="eyebrow mb-6 flex items-center gap-2 text-muted">
-          <span className="size-1.5 rounded-full bg-accent" />
-          {eyebrow}
-        </p>
-      </Reveal>
-      <h1 className="display max-w-6xl text-[clamp(3rem,10vw,8.5rem)]">
-        <SplitWords text={title} />
-        {accent && (
-          <>
-            {" "}
-            <SplitWords text={accent} wordClassName="serif-accent text-accent" delay={0.2} />
-          </>
-        )}
-      </h1>
-      <div className="mt-8 flex flex-col gap-6 md:mt-12 md:flex-row md:items-end md:justify-between">
-        {text && (
-          <Reveal delay={0.3} className="max-w-xl">
-            <p className="text-lg leading-relaxed text-muted md:text-xl">{text}</p>
+    <header className="relative">
+      <div className={`dots-dark relative bg-night text-paper ${image ? "pb-[18vh] md:pb-[26vh]" : "pb-16 md:pb-24"}`}>
+        <div className="container-x pt-28 md:pt-36">
+          <Reveal>
+            <div className="flex items-center gap-3 border-t border-paper/15 pt-3 text-paper/55">
+              <Link href="/" className="eyebrow hover:text-accent">Ummeed</Link>
+              <span className="eyebrow">/</span>
+              <span className="eyebrow text-accent">{eyebrow}</span>
+            </div>
           </Reveal>
-        )}
-        {children && <Reveal delay={0.4}>{children}</Reveal>}
+          <h1 className="display mt-10 max-w-6xl text-[clamp(3rem,10.5vw,9.5rem)] md:mt-14">
+            <SplitWords text={title} />
+            {accent && (
+              <>
+                {" "}
+                <Mark delay={0.55}>
+                  <SplitWords text={accent} delay={0.18} />
+                </Mark>
+              </>
+            )}
+          </h1>
+          {(text || children) && (
+            <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:items-end">
+              {text && (
+                <Reveal delay={0.3} className="md:col-span-6 md:col-start-1">
+                  <p className="text-lg leading-relaxed text-paper/70 md:text-xl">{text}</p>
+                </Reveal>
+              )}
+              {children && (
+                <Reveal delay={0.4} className="md:col-span-5 md:col-start-8 md:justify-self-end">
+                  {children}
+                </Reveal>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       {image && (
-        <Reveal delay={0.35} y={60}>
-          <Parallax speed={0.08} className="mt-12 aspect-[4/5] rounded-xl3 sm:aspect-[16/9] md:mt-16 md:aspect-[21/9]">
+        <div className="container-x relative -mt-[14vh] md:-mt-[22vh]">
+          <ImageReveal className="aspect-[4/5] rounded-xl3 sm:aspect-[16/9] md:aspect-[21/9]" delay={0.2}>
             <SmartImage src={image} alt="" fill priority sizes="100vw" className="object-cover" />
-          </Parallax>
-        </Reveal>
+          </ImageReveal>
+        </div>
       )}
     </header>
   );

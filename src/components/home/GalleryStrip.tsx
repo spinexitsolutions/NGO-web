@@ -32,11 +32,11 @@ export default function GalleryStrip({ items }: { items: GalleryItem[] }) {
       </div>
       <div className="absolute inset-0 bg-linear-to-b from-night via-night/40 to-night" />
       <div className="relative flex h-full flex-col items-center justify-center px-5 text-center text-paper">
-        <p className="eyebrow mb-6 text-paper/60">Gallery</p>
+        <p className="eyebrow mb-6 text-paper/60">(—) Gallery</p>
         <h2 className="display max-w-4xl text-[clamp(2.8rem,9vw,8rem)]">
           <SplitWords text="Moments that" /> <SplitWords text="made us." wordClassName="serif-accent text-accent" delay={0.15} />
         </h2>
-        <Link href="/gallery" className="mt-10 rounded-full bg-paper px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-105">
+        <Link href="/gallery" data-cursor="Open" className="mt-10 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-ink transition-transform hover:scale-105">
           Open the gallery
         </Link>
       </div>

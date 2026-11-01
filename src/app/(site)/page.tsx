@@ -21,8 +21,8 @@ export default async function Home() {
   const donorCount = Math.max(donorsThisYear, db.campaigns.reduce((s, c) => s + c.donors, 0));
 
   const render: Record<HomeSection["id"], () => React.ReactNode> = {
-    hero: () => <Hero hero={db.hero} stat={db.stats[0]} donors={donorCount} />,
-    manifesto: () => <Manifesto text={db.hero.manifesto} />,
+    hero: () => <Hero hero={db.hero} stat={db.stats[0]} donors={donorCount} campaign={db.campaigns.filter((c) => c.status === "active").sort((a, b) => Number(b.urgent) - Number(a.urgent))[0]} />,
+    manifesto: () => <Manifesto text={db.hero.manifesto} image={db.team[0]?.image} />,
     stats: () => <Stats stats={db.stats} />,
     programs: () => <Programs programs={published(db.programs).filter((p) => p.featured)} />,
     campaigns: () => <Campaigns campaigns={db.campaigns} />,

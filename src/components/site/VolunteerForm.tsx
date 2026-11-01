@@ -18,7 +18,7 @@ export default function VolunteerForm() {
     <AnimatePresence mode="wait">
       {state === "done" ? (
         <motion.div key="done" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl3 bg-card p-10 text-center ring-1 ring-ink/5">
-          <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent text-white"><Check className="size-7" /></span>
+          <span className="mx-auto grid size-16 place-items-center rounded-xl bg-accent text-ink"><Check className="size-7" /></span>
           <p className="display mt-6 text-4xl">Welcome aboard, {f.name.split(" ")[0]}!</p>
           <p className="mx-auto mt-3 max-w-md text-muted">Our volunteer team will call you within a week to find the right role for you.</p>
         </motion.div>
@@ -57,8 +57,8 @@ export default function VolunteerForm() {
             </div>
           </div>
           <Textarea label="Tell us a little about yourself" name="message" optional value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} placeholder="Your skills, experience, why Ummeed…" />
-          {error && <p className="text-sm text-accent">{error}</p>}
-          <button type="submit" disabled={state === "loading"} className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-ink py-4 font-semibold text-paper transition-colors hover:bg-accent sm:w-auto sm:px-10">
+          {error && <p className="text-sm text-red-600">{error}</p>}
+          <button type="submit" disabled={state === "loading"} className="flex h-13 w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 font-semibold text-paper transition-colors hover:bg-accent hover:text-ink sm:w-auto sm:px-10">
             {state === "loading" && <Loader2 className="size-4 animate-spin" />} Sign me up
           </button>
         </motion.form>

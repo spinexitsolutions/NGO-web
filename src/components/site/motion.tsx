@@ -208,7 +208,7 @@ export function Progress({ value, className, barClassName }: { value: number; cl
   return (
     <div className={cn("h-1.5 w-full overflow-hidden rounded-full bg-ink/10", className)}>
       <motion.div
-        className={cn("h-full rounded-full bg-accent", barClassName)}
+        className={cn("h-full rounded-full", barClassName ?? "bg-accent")}
         initial={{ width: 0 }}
         whileInView={{ width: `${value}%` }}
         viewport={{ once: true }}
@@ -228,4 +228,59 @@ export function useMediaQuery(q: string) {
     return () => m.removeEventListener("change", on);
   }, [q]);
   return match;
+}
+
+/** Highlighter-pen mark: a lime bar wipes in behind the words when they enter the view. */
+export function Mark({ children, className, delay = 0.2, start }: { children: ReactNode; className?: string; delay?: number; start?: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const go = start === undefined ? inView : start && inView;
+  return (
+    <span ref={ref} className={cn("relative inline-block px-[0.08em] text-ink", className)}>
+      <motion.span
+        aria-hidden
+        className="absolute inset-x-0 bottom-[0.06em] top-[0.14em] -z-0 origin-left rounded-[0.12em] bg-accent"
+        initial={{ scaleX: 0 }}
+        animate={go ? { scaleX: 1 } : undefined}
+        transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1], delay }}
+      />
+      <span className="relative">{children}</span>
+    </span>
+  );
+}
+
+/** Label that rolls up to a copy of itself on hover (put inside a `group`). */
+export function Roll({ children, className }: { children: string; className?: string }) {
+  return (
+    <span className={cn("relative inline-flex h-[1.25em] overflow-hidden", className)}>
+      <span className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:-translate-y-1/2">
+        <span className="leading-[1.25]">{children}</span>
+        <span className="leading-[1.25]" aria-hidden>{children}</span>
+      </span>
+    </span>
+  );
+}
+
+/** Image container whose content is revealed by a clip-path wipe + settle */
+export function ImageReveal({ children, className, delay = 0, from = "bottom" }: { children: ReactNode; className?: string; delay?: number; from?: "bottom" | "left" }) {
+  const start = from === "bottom" ? "inset(100% 0% 0% 0%)" : "inset(0% 100% 0% 0%)";
+  return (
+    <motion.div
+      className={cn("relative overflow-hidden", className)}
+      initial={{ clipPath: start }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay }}
+    >
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.25 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, margin: "-10% 0px" }}
+        transition={{ duration: 1.6, ease: EASE, delay }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
 }

@@ -24,18 +24,18 @@ export default async function AboutPage() {
       <PageHeader eyebrow="About Ummeed" title={about.headline.split(" ").slice(0, -2).join(" ")} accent={about.headline.split(" ").slice(-2).join(" ")} text={about.intro} image={about.image} />
 
       <section className="container-x grid gap-5 py-24 md:grid-cols-2 md:py-32">
-        <Reveal className="rounded-xl3 bg-night p-8 text-paper md:p-12">
+        <Reveal className="dots-dark rounded-xl3 bg-night p-8 text-paper md:p-12">
           <p className="eyebrow text-paper/50">Mission</p>
           <p className="display mt-8 text-3xl !leading-[1.1] md:text-[2.6rem]">{about.mission}</p>
         </Reveal>
-        <Reveal delay={0.1} className="rounded-xl3 bg-accent p-8 text-white md:p-12">
-          <p className="eyebrow text-white/70">Vision</p>
-          <p className="serif-accent mt-8 text-4xl !leading-[1.05] md:text-6xl">{about.vision}</p>
+        <Reveal delay={0.1} className="rounded-xl3 bg-accent p-8 text-ink md:p-12">
+          <p className="eyebrow text-ink/60">Vision</p>
+          <p className="display mt-8 text-4xl !leading-[1.02] md:text-6xl">{about.vision}</p>
         </Reveal>
       </section>
 
       <section className="container-x py-12 md:py-20">
-        <p className="eyebrow mb-10 flex items-center gap-2 text-muted"><span className="size-1.5 rounded-full bg-accent" /> How it started</p>
+        <p className="eyebrow mb-10 border-t border-ink/15 pt-3 text-muted">(Story) How it started</p>
         <ScrollText text={about.story} className="display max-w-5xl text-[clamp(1.7rem,3.6vw,3.2rem)] !leading-[1.12] !tracking-[-0.03em]" />
       </section>
 
@@ -44,7 +44,7 @@ export default async function AboutPage() {
         <div className="mt-14 grid gap-px overflow-hidden rounded-xl3 bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-4">
           {about.values.map((v, i) => (
             <Reveal key={v.title} delay={i * 0.07} className="group flex min-h-72 flex-col justify-between bg-card p-7 transition-colors duration-500 hover:bg-night hover:text-paper">
-              <span className="display text-5xl text-accent">0{i + 1}</span>
+              <span className="display text-5xl text-accent-ink group-hover:text-accent">0{i + 1}</span>
               <div>
                 <h3 className="display text-2xl">{v.title}</h3>
                 <p className="mt-3 leading-relaxed text-muted transition-colors group-hover:text-paper/60">{v.text}</p>

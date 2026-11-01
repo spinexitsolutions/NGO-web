@@ -8,7 +8,7 @@ export default function Events({ events }: { events: EventItem[] }) {
   if (!upcoming.length) return null;
   return (
     <section className="container-x py-24 md:py-36">
-      <SectionHeading eyebrow="Upcoming" title="Show up" accent="in person.">
+      <SectionHeading index="08" eyebrow="Upcoming" title="Show up" accent="in person.">
         <Button href="/events" variant="ghost">All events</Button>
       </SectionHeading>
       <div className="mt-14">

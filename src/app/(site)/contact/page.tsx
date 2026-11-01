@@ -26,12 +26,12 @@ export default async function ContactPage() {
             <Reveal key={it.label} delay={i * 0.05}>
               {it.href ? (
                 <a href={it.href} className="group flex items-start gap-4 rounded-2xl bg-card p-5 ring-1 ring-ink/5 transition-colors hover:bg-night hover:text-paper">
-                  <it.icon className="mt-0.5 size-5 text-accent" />
+                  <it.icon className="mt-0.5 size-5 text-accent-ink" />
                   <span><span className="block text-sm text-muted group-hover:text-paper/60">{it.label}</span><span className="text-lg font-semibold">{it.value}</span></span>
                 </a>
               ) : (
                 <div className="flex items-start gap-4 rounded-2xl bg-card p-5 ring-1 ring-ink/5">
-                  <it.icon className="mt-0.5 size-5 text-accent" />
+                  <it.icon className="mt-0.5 size-5 text-accent-ink" />
                   <span><span className="block text-sm text-muted">{it.label}</span><span className="font-semibold">{it.value}</span></span>
                 </div>
               )}

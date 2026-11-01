@@ -30,7 +30,7 @@ export default async function ProgramsPage() {
               </div>
               <div className="flex flex-col justify-between gap-10 p-7 md:p-12">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ background: p.color }}>{p.category}</span>
+                  <span className="eyebrow rounded px-2 py-1 text-ink" style={{ background: p.color }}>{p.category}</span>
                   <span className="text-sm tabular-nums text-muted">{String(i + 1).padStart(2, "0")} / {String(programs.length).padStart(2, "0")}</span>
                 </div>
                 <div>

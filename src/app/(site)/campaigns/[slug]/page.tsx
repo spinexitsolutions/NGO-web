@@ -80,7 +80,7 @@ export default async function CampaignPage({ params }: Props) {
                 <ul className="space-y-3">
                   {recent.map((d) => (
                     <li key={d.id} className="flex items-center gap-3 text-sm">
-                      <span className="grid size-9 place-items-center rounded-full bg-accent-soft text-accent"><Heart className="size-4 fill-current" /></span>
+                      <span className="grid size-9 place-items-center rounded-full bg-accent text-ink"><Heart className="size-4 fill-current" /></span>
                       <span className="flex-1">
                         <b className="font-semibold">{d.donorName.split(" ")[0]}</b> gave {inr(d.amount)}
                       </span>

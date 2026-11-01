@@ -18,12 +18,18 @@ Copy `.env.example` to `.env.local` to change the admin credentials and session 
 
 Pages: Home, About, Programmes (+ detail), Campaigns (+ detail with live progress), Donate (3-step checkout with simulated payment and an 80G receipt number), Impact & transparency (reports, fund allocation, FAQ), Stories (+ article pages with a reading-progress bar), Events (+ registration with seat limits), Gallery (filter + lightbox), Volunteer, Contact (+ map and FAQ), 404.
 
-Motion and design:
-- Intro loader: a word cycle, a counter and a curtain reveal. It runs once per session and is fully configurable from the admin.
-- "Dynamic island" navbar: it shrinks to a small pill on scroll, the menu button shows scroll progress, and the full-screen menu opens with a circular reveal and image previews.
-- Hero image that expands to full screen on scroll. Text lights up word by word as you scroll. Programmes scroll sideways on desktop and swipe on mobile. Testimonial cards stack. A photo follows the cursor over the events list. The gallery has parallax columns. Partner names scroll in a marquee. Page changes use a two-layer curtain.
-- Mobile-first layout, smooth scrolling, and support for reduced-motion settings.
-- Type: Inter Tight paired with Instrument Serif italic. The accent colour is set from the admin.
+Design system ("field notes"):
+- Sans-serif only: **Bricolage Grotesque** for display, **Geist** for text, **Geist Mono** for labels and meta.
+- Deep forest green with an electric-lime accent. The accent is set from the admin and is always used as a fill under dark text, so contrast stays readable.
+- Editorial 12-column grid, numbered section labels on hairline rules, a highlighter-pen mark on key phrases, and a notebook dot-grid texture.
+
+Motion and UX:
+- **Intro:** words roll past like an odometer while a percentage counts up, then five shutters lift away. Fully set from the admin.
+- **Navbar:** separate tiles — logo, links with index numbers, a live campaign progress ring, Donate, and Menu. It hides when you scroll down and comes back when you scroll up. Menu opens with a column-shutter reveal, a lime band behind the hovered link, and an image preview. Mobile gets an app-style bottom dock.
+- **Hero:** a live IST clock, a live-campaign widget, and a lime spotlight that follows the cursor over the dot grid. The main photo is cut into five strips that drift apart and lock into one image as you scroll.
+- **Programmes:** an accordion of photo panels — horizontal on desktop, stacked on mobile.
+- **Rest of the home page:** a bento grid of impact numbers, a featured campaign plus a draggable rail of the rest, an auto-advancing testimonial slider, and a partner marquee whose speed follows scroll speed.
+- **Site-wide:** a custom cursor with labels, buttons whose text rolls on hover, images that wipe in, shutter page transitions, Lenis smooth scrolling, and support for reduced-motion settings.
 
 ## Admin panel (`/admin`)
 

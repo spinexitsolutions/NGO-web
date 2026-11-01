@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 import SmartImage from "@/components/ui/SmartImage";
 import Button from "@/components/ui/Button";
 import { Input } from "./Field";
-import { SplitWords } from "./motion";
+import { Mark, SplitWords } from "./motion";
 import { useSubmit } from "./useSubmit";
 
 type C = { id: string; title: string; image: string; raised: number; goal: number };
@@ -77,9 +77,9 @@ export default function DonateFlow({
         <div>
           {step < 3 && (
             <>
-              <p className="eyebrow mb-6 flex items-center gap-2 text-muted"><span className="size-1.5 rounded-full bg-accent" /> Donate · 80G tax benefit</p>
+              <p className="eyebrow mb-6 border-t border-ink/15 pt-3 text-muted">(Give) Donate — 80G tax benefit</p>
               <h1 className="display text-[clamp(2.8rem,8vw,6.5rem)]">
-                <SplitWords text="Give a little," /> <SplitWords text="change a lot." wordClassName="serif-accent text-accent" delay={0.2} />
+                <SplitWords text="Give a little," /> <Mark delay={0.6}><SplitWords text="change a lot." delay={0.2} /></Mark>
               </h1>
 
               {/* stepper */}
@@ -92,7 +92,7 @@ export default function DonateFlow({
                       onClick={() => i < step && go(i)}
                       className={cn("flex items-center gap-2 text-sm font-medium transition-colors", i <= step ? "text-ink" : "text-muted")}
                     >
-                      <span className={cn("grid size-7 place-items-center rounded-full text-xs transition-colors", i < step ? "bg-ink text-paper" : i === step ? "bg-accent text-white" : "bg-ink/5")}>
+                      <span className={cn("grid size-7 place-items-center rounded-full text-xs transition-colors", i < step ? "bg-ink text-paper" : i === step ? "bg-accent text-ink" : "bg-ink/5")}>
                         {i < step ? <Check className="size-3.5" /> : i + 1}
                       </span>
                       <span className="hidden sm:inline">{s}</span>
@@ -120,7 +120,7 @@ export default function DonateFlow({
               >
                 {step === 0 && (
                   <div className="space-y-10">
-                    <div className="relative inline-flex rounded-full bg-ink/5 p-1">
+                    <div className="relative inline-flex rounded-xl bg-ink/5 p-1">
                       {(["one-time", "monthly"] as Freq[]).map((f) => (
                         <button
                           key={f}
@@ -129,9 +129,9 @@ export default function DonateFlow({
                             setFreq(f);
                             if (!custom) setAmount(PRESETS[f][2]);
                           }}
-                          className={cn("relative z-10 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors", freq === f ? "text-paper" : "text-ink/60")}
+                          className={cn("relative z-10 rounded-lg px-6 py-2.5 text-sm font-semibold transition-colors", freq === f ? "text-accent" : "text-ink/60")}
                         >
-                          {freq === f && <motion.span layoutId="freq" className="absolute inset-0 -z-10 rounded-full bg-ink" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
+                          {freq === f && <motion.span layoutId="freq" className="absolute inset-0 -z-10 rounded-lg bg-ink" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
                           {f === "one-time" ? "Give once" : "Monthly ♥"}
                         </button>
                       ))}
@@ -149,8 +149,8 @@ export default function DonateFlow({
                               setCustom("");
                             }}
                             className={cn(
-                              "rounded-2xl px-4 py-5 text-left ring-1 transition-all active:scale-[0.98]",
-                              amount === p && !custom ? "bg-ink text-paper ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40",
+                              "rounded-xl2 px-4 py-5 text-left ring-1 transition-all active:scale-[0.98]",
+                              amount === p && !custom ? "bg-ink text-accent ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40",
                             )}
                           >
                             <span className="display block text-2xl md:text-3xl">{inr(p)}</span>
@@ -219,9 +219,9 @@ export default function DonateFlow({
                       <Input label="City" name="city" optional value={details.city} onChange={(e) => setDetails({ ...details, city: e.target.value })} />
                       <Input label="PAN (for 80G receipt)" name="pan" optional className="sm:col-span-2" value={details.pan} onChange={(e) => setDetails({ ...details, pan: e.target.value.toUpperCase().slice(0, 10) })} placeholder="ABCDE1234F" />
                     </div>
-                    {formErr && <p className="text-sm text-accent">{formErr}</p>}
+                    {formErr && <p className="text-sm text-red-600">{formErr}</p>}
                     <div className="flex flex-wrap gap-3 pt-4">
-                      <button type="button" onClick={() => go(0)} className="flex h-12 items-center gap-2 rounded-full px-5 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">
+                      <button type="button" onClick={() => go(0)} className="flex h-12 items-center gap-2 rounded-xl px-5 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">
                         <ArrowLeft className="size-4" /> Back
                       </button>
                       <Button type="submit">Continue to payment</Button>
@@ -241,7 +241,7 @@ export default function DonateFlow({
                           key={m}
                           type="button"
                           onClick={() => setMethod(m)}
-                          className={cn("rounded-2xl p-5 text-left ring-1 transition-all", method === m ? "bg-ink text-paper ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40")}
+                          className={cn("rounded-xl2 p-5 text-left ring-1 transition-all", method === m ? "bg-ink text-accent ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40")}
                         >
                           <Icon className="size-6" />
                           <p className="mt-6 font-semibold">{m === "NetBanking" ? "Net banking" : m}</p>
@@ -267,16 +267,16 @@ export default function DonateFlow({
                       )}
                       <p className="mt-4 flex items-center gap-2 text-xs text-muted"><Lock className="size-3.5" /> Demo checkout — no real payment is taken. Plug in Razorpay / Stripe in production.</p>
                     </div>
-                    {error && <p className="text-sm text-accent">{error}</p>}
+                    {error && <p className="text-sm text-red-600">{error}</p>}
                     <div className="flex flex-wrap gap-3">
-                      <button type="button" onClick={() => go(1)} className="flex h-12 items-center gap-2 rounded-full px-5 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">
+                      <button type="button" onClick={() => go(1)} className="flex h-12 items-center gap-2 rounded-xl px-5 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">
                         <ArrowLeft className="size-4" /> Back
                       </button>
                       <button
                         type="button"
                         onClick={pay}
                         disabled={state === "loading"}
-                        className="relative flex h-12 min-w-56 items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 font-semibold text-white transition-transform active:scale-[0.98] disabled:opacity-90"
+                        className="relative flex h-12 min-w-56 items-center justify-center gap-2 overflow-hidden rounded-xl bg-accent px-6 font-semibold text-ink transition-transform active:scale-[0.98] disabled:opacity-90"
                       >
                         {state === "loading" ? (
                           <>
@@ -301,7 +301,7 @@ export default function DonateFlow({
 
         {/* summary */}
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="overflow-hidden rounded-xl3 bg-night text-paper">
+          <div className="dots-dark overflow-hidden rounded-xl3 bg-night text-paper">
             <div className="relative aspect-[16/10]">
               <SmartImage
                 src={campaign?.image ?? "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80"}
@@ -315,7 +315,7 @@ export default function DonateFlow({
             </div>
             <div className="p-6 md:p-8">
               <p className="eyebrow text-paper/50">Your gift</p>
-              <p className="display mt-3 text-6xl tabular-nums">{inr(amount || 0)}</p>
+              <p className="display mt-3 text-6xl tabular-nums text-accent">{inr(amount || 0)}</p>
               <p className="text-paper/60">{freq === "monthly" ? "every month · cancel anytime" : "one-time donation"}</p>
               <div className="my-6 h-px bg-paper/10" />
               <ul className="space-y-3 text-sm text-paper/75">
@@ -334,7 +334,7 @@ export default function DonateFlow({
 
 function CampaignOption({ active, onClick, title, sub, image }: { active: boolean; onClick: () => void; title: string; sub: string; image?: string }) {
   return (
-    <button type="button" onClick={onClick} className={cn("flex items-center gap-3 rounded-2xl p-3 text-left ring-1 transition-all", active ? "bg-accent-soft ring-accent" : "bg-white ring-ink/10 hover:ring-ink/40")}>
+    <button type="button" onClick={onClick} className={cn("flex items-center gap-3 rounded-2xl p-3 text-left ring-1 transition-all", active ? "bg-accent-soft ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40")}>
       <span className="relative size-12 shrink-0 overflow-hidden rounded-xl bg-paper">
         {image ? <SmartImage src={image} alt="" fill sizes="48px" className="object-cover" /> : <span className="grid size-full place-items-center text-lg">♥</span>}
       </span>
@@ -342,7 +342,7 @@ function CampaignOption({ active, onClick, title, sub, image }: { active: boolea
         <span className="block truncate text-sm font-semibold">{title}</span>
         <span className="text-xs text-muted">{sub}</span>
       </span>
-      <span className={cn("grid size-5 place-items-center rounded-full ring-1", active ? "bg-accent text-white ring-accent" : "ring-ink/20")}>{active && <Check className="size-3" />}</span>
+      <span className={cn("grid size-5 place-items-center rounded-full ring-1", active ? "bg-ink text-accent ring-ink" : "ring-ink/20")}>{active && <Check className="size-3" />}</span>
     </button>
   );
 }
@@ -350,7 +350,7 @@ function CampaignOption({ active, onClick, title, sub, image }: { active: boolea
 function Success({ name, amount, freq, receipt, email }: { name: string; amount: number; freq: Freq; receipt: string; email: string }) {
   return (
     <div className="py-6">
-      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 260, damping: 18 }} className="grid size-24 place-items-center rounded-full bg-accent text-white">
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 260, damping: 18 }} className="grid size-24 place-items-center rounded-2xl bg-accent text-ink">
         <motion.svg viewBox="0 0 24 24" className="size-12" fill="none" stroke="currentColor" strokeWidth={2.5}>
           <motion.path d="M5 12.5l4.5 4.5L19 7.5" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6, delay: 0.25 }} />
         </motion.svg>
@@ -367,7 +367,7 @@ function Success({ name, amount, freq, receipt, email }: { name: string; amount:
       </div>
       <div className="mt-10 flex flex-wrap gap-3">
         <Button href="/stories" variant="ink">See what you made possible</Button>
-        <Link href="/" className="flex h-12 items-center rounded-full px-6 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">Back home</Link>
+        <Link href="/" className="flex h-12 items-center rounded-xl px-6 text-sm font-semibold ring-1 ring-ink/15 hover:ring-ink">Back home</Link>
       </div>
     </div>
   );

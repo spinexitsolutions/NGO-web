@@ -13,7 +13,7 @@ export default function ContactForm() {
   if (state === "done")
     return (
       <div className="rounded-xl3 bg-card p-10 text-center ring-1 ring-ink/5">
-        <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent text-white"><Check className="size-7" /></span>
+        <span className="mx-auto grid size-16 place-items-center rounded-xl bg-accent text-ink"><Check className="size-7" /></span>
         <p className="display mt-6 text-4xl">Message received.</p>
         <p className="mt-3 text-muted">We reply to every message within two working days.</p>
       </div>
@@ -39,8 +39,8 @@ export default function ContactForm() {
         <Input label="Email" name="email" type="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />
       </div>
       <Textarea label="Message" name="message" required value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} />
-      {error && <p className="text-sm text-accent">{error}</p>}
-      <button type="submit" disabled={state === "loading"} className="flex w-full items-center justify-center gap-2 rounded-full bg-ink py-4 font-semibold text-paper transition-colors hover:bg-accent sm:w-auto sm:px-10">
+      {error && <p className="text-sm text-red-600">{error}</p>}
+      <button type="submit" disabled={state === "loading"} className="flex w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 font-semibold text-paper transition-colors hover:bg-accent hover:text-ink sm:w-auto sm:px-10">
         {state === "loading" && <Loader2 className="size-4 animate-spin" />} Send message
       </button>
     </form>

@@ -28,10 +28,10 @@ export default async function ImpactPage() {
             <p className="display mt-6 text-[clamp(3.5rem,9vw,7rem)]">{compactInr(raised)}</p>
             <p className="mt-2 max-w-md text-paper/60">From individual donors and CSR partners, tracked live from our donor CRM.</p>
           </Reveal>
-          <Reveal delay={0.1} className="flex flex-col justify-between rounded-xl3 bg-accent p-8 text-white md:p-10">
-            <p className="eyebrow text-white/70">Programme ratio</p>
+          <Reveal delay={0.1} className="flex flex-col justify-between rounded-xl3 bg-accent p-8 text-ink md:p-10">
+            <p className="eyebrow text-ink/60">Programme ratio</p>
             <p className="display text-[clamp(3.5rem,9vw,7rem)]"><Counter value={db.allocation.filter((a) => !/fund|admin/i.test(a.label)).reduce((s, a) => s + a.value, 0)} suffix="%" /></p>
-            <p className="text-white/80">of spending reaches programmes directly</p>
+            <p className="text-ink/75">of spending reaches programmes directly</p>
           </Reveal>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default async function ImpactPage() {
               <a href={r.url} className="group flex items-center gap-5 py-6">
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-card ring-1 ring-ink/5"><FileText className="size-5" /></span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-lg font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent md:text-xl">{r.title}</span>
+                  <span className="block truncate text-lg font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent-ink md:text-xl">{r.title}</span>
                   <span className="text-sm text-muted">{r.kind} · PDF · {r.size}</span>
                 </span>
                 <span className="grid size-11 place-items-center rounded-full ring-1 ring-ink/15 transition-all group-hover:bg-ink group-hover:text-paper"><Download className="size-4" /></span>

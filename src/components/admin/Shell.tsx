@@ -97,7 +97,7 @@ export default function Shell({ children, siteName, accent, email, unread, newVo
                   {on && <motion.span layoutId="nav-active" className="absolute inset-0 rounded-xl bg-white shadow-[0_1px_3px_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.04)]" transition={{ type: "spring", stiffness: 500, damping: 40 }} />}
                   <Icon className={clsx("relative size-4", on ? "text-ink" : "text-muted")} />
                   <span className="relative">{it.label}</span>
-                  {!!it.badge && <span className="relative ml-auto rounded-full bg-accent px-1.5 py-px text-[10.5px] font-semibold tabular-nums text-white">{it.badge}</span>}
+                  {!!it.badge && <span className="relative ml-auto rounded-full bg-accent px-1.5 py-px text-[10.5px] font-semibold tabular-nums text-ink">{it.badge}</span>}
                 </Link>
               );
             })}

@@ -8,19 +8,19 @@ import type { FAQ } from "@/lib/types";
 export default function Faq({ items }: { items: FAQ[] }) {
   const [open, setOpen] = useState<string | null>(items[0]?.id ?? null);
   return (
-    <ul className="border-t border-line">
+    <ul className="border-t border-ink/15">
       {items.map((f) => {
         const isOpen = open === f.id;
         return (
-          <li key={f.id} className="border-b border-line">
+          <li key={f.id} className="border-b border-ink/15">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? null : f.id)}
               aria-expanded={isOpen}
               className="flex w-full items-center justify-between gap-6 py-6 text-left"
             >
-              <span className="text-lg font-semibold tracking-[-0.02em] md:text-2xl">{f.question}</span>
-              <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className={`grid size-10 shrink-0 place-items-center rounded-full transition-colors ${isOpen ? "bg-accent text-white" : "bg-ink/5"}`}>
+              <span className="display text-xl md:text-3xl">{f.question}</span>
+              <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className={`grid size-10 shrink-0 place-items-center rounded-xl transition-colors ${isOpen ? "bg-accent text-ink" : "bg-ink/5"}`}>
                 <Plus className="size-4" />
               </motion.span>
             </button>

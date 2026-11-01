@@ -57,7 +57,7 @@ export function Button({ variant = "secondary", size = "md", loading, className,
         "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full font-medium transition-all duration-200 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50",
         size === "sm" ? "h-8 px-3 text-[13px]" : "h-10 px-4 text-sm",
         variant === "primary" && "bg-ink text-white hover:bg-ink-2",
-        variant === "accent" && "bg-accent text-white hover:brightness-110",
+        variant === "accent" && "bg-accent text-ink hover:brightness-105",
         variant === "secondary" && "border border-line bg-white text-ink hover:border-ink/25 hover:bg-paper/60",
         variant === "ghost" && "text-muted hover:bg-ink/5 hover:text-ink",
         variant === "danger" && "bg-red-600 text-white hover:bg-red-700",
@@ -99,7 +99,7 @@ const BADGE: Record<string, string> = {
   blue: "bg-blue-50 text-blue-700 ring-blue-600/15",
   gray: "bg-ink/[0.04] text-muted ring-ink/10",
   violet: "bg-violet-50 text-violet-700 ring-violet-600/15",
-  accent: "bg-accent-soft text-accent ring-accent/20",
+  accent: "bg-accent-soft text-accent-ink ring-accent/20",
 };
 export const STATUS_TONE: Record<string, keyof typeof BADGE> = {
   published: "green", active: "green", completed: "green", onboarded: "green", replied: "green",

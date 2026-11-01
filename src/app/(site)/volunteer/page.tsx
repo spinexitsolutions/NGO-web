@@ -31,11 +31,11 @@ export default async function VolunteerPage() {
         <SectionHeading eyebrow="Ways to help" title="Find your" accent="role." />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ROLES.map((r, i) => (
-            <Reveal key={r.t} delay={i * 0.07} className="group flex min-h-64 flex-col justify-between rounded-xl3 bg-card p-7 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-1 hover:bg-accent hover:text-white">
-              <span className="text-sm tabular-nums text-muted group-hover:text-white/70">{r.n}</span>
+            <Reveal key={r.t} delay={i * 0.07} className="group flex min-h-64 flex-col justify-between rounded-xl3 bg-card p-7 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-1 hover:bg-accent hover:text-ink">
+              <span className="text-sm tabular-nums text-muted group-hover:text-ink/60">{r.n}</span>
               <div>
                 <h3 className="display text-4xl">{r.t}</h3>
-                <p className="mt-3 leading-relaxed text-muted group-hover:text-white/85">{r.d}</p>
+                <p className="mt-3 leading-relaxed text-muted group-hover:text-ink/75">{r.d}</p>
               </div>
             </Reveal>
           ))}

@@ -251,7 +251,7 @@ export function FieldGrid({ fields, value, onChange, lookups = {} }: { fields: F
         <div key={f.key} className={clsx(f.full || f.type === "slug" || f.type === "image" || f.type === "repeater" || f.type === "images" || f.type === "textarea" ? "sm:col-span-2" : "")}>
           <Label htmlFor={`f-${f.key}`} help={f.help}>
             {f.label}
-            {f.required && <span className="text-accent"> *</span>}
+            {f.required && <span className="text-accent-ink"> *</span>}
           </Label>
           <FieldInput
             field={f}

@@ -37,7 +37,7 @@ export function Chip({ active, children, onClick }: { active: boolean; children:
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={cn("rounded-full px-4 py-2.5 text-sm font-medium ring-1 transition-all active:scale-95", active ? "bg-ink text-paper ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40")}
+      className={cn("rounded-lg px-3.5 py-2.5 text-sm font-medium ring-1 transition-all active:scale-95", active ? "bg-ink text-accent ring-ink" : "bg-white ring-ink/10 hover:ring-ink/40")}
     >
       {children}
     </button>

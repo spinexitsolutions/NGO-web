@@ -8,7 +8,7 @@ import { api } from "@/lib/admin-api";
 import { Button, Card, PageHeader, useConfirm, useToast } from "./ui";
 import { SaveBar, Sections, useContentForm, type FormSection } from "./ContentForm";
 
-const PRESETS = ["#FF4D1C", "#E11D48", "#F2A007", "#1F9D55", "#0FA3B1", "#2F6BFF", "#7C3AED", "#0E0E0C"];
+const PRESETS = ["#C6F24E", "#FF8A3D", "#FFD23F", "#7CF2C8", "#9AD7FF", "#C9C2FF", "#FF7AB6", "#F2F1EC"];
 
 const sections: FormSection[] = [
   {
@@ -81,7 +81,7 @@ export default function SettingsForm({ initial }: { initial: SiteSettings }) {
   const router = useRouter();
   const { confirm, dialog } = useConfirm();
   const [resetting, setResetting] = useState(false);
-  const accent = String(f.data.accent || "#FF4D1C");
+  const accent = String(f.data.accent || "#C6F24E");
 
   async function reset() {
     if (!(await confirm("All content and CRM data will be restored to the original demo. Your changes will be lost."))) return;
@@ -120,8 +120,8 @@ export default function SettingsForm({ initial }: { initial: SiteSettings }) {
             </label>
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-3 rounded-2xl bg-paper p-4">
-            <span className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-white">{String(f.data.donateLabel || "Donate")}</span>
-            <span className="text-2xl font-semibold tracking-tight">Every child <span className="serif-accent text-accent">deserves</span></span>
+            <span className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-ink">{String(f.data.donateLabel || "Donate")}</span>
+            <span className="text-2xl font-semibold tracking-tight">Every child <span className="serif-accent text-accent-ink">deserves</span></span>
             <div className="h-2 w-32 overflow-hidden rounded-full bg-white"><div className="h-full w-2/3 rounded-full bg-accent" /></div>
           </div>
         </div>

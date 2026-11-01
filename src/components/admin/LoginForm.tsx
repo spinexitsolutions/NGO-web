@@ -31,13 +31,13 @@ export default function LoginForm({ name }: { name: string }) {
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="w-full max-w-sm">
       <div className="mb-10 flex items-center gap-2.5">
-        <div className="grid size-10 place-items-center rounded-2xl bg-accent text-white shadow-lg shadow-accent/30">
+        <div className="grid size-10 place-items-center rounded-2xl bg-accent text-ink shadow-lg shadow-accent/30">
           <Heart className="size-5 fill-white" />
         </div>
         <div className="text-lg font-semibold tracking-tight">{name}</div>
       </div>
       <h1 className="text-[34px] font-semibold leading-tight tracking-[-0.04em]">
-        Welcome <span className="serif-accent text-accent">back.</span>
+        Welcome <span className="serif-accent text-accent-ink">back.</span>
       </h1>
       <p className="mt-2 text-[15px] text-muted">Sign in to manage your website, donors and volunteers.</p>
 

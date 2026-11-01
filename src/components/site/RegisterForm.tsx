@@ -11,7 +11,7 @@ export default function RegisterForm({ eventId, seatsLeft }: { eventId: string; 
   if (state === "done")
     return (
       <div className="py-6 text-center">
-        <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent text-white"><Check className="size-7" /></span>
+        <span className="mx-auto grid size-16 place-items-center rounded-xl bg-accent text-ink"><Check className="size-7" /></span>
         <p className="display mt-6 text-3xl">You&apos;re on the list!</p>
         <p className="mt-2 text-sm text-paper/60">We&apos;ve sent the details to {f.email}.</p>
       </div>
@@ -36,8 +36,8 @@ export default function RegisterForm({ eventId, seatsLeft }: { eventId: string; 
           <button type="button" aria-label="More seats" onClick={() => setF({ ...f, seats: Math.min(Math.min(10, seatsLeft), f.seats + 1) })} className="grid size-8 place-items-center rounded-full bg-paper/10"><Plus className="size-3.5" /></button>
         </div>
       </div>
-      {error && <p className="text-sm text-accent">{error}</p>}
-      <button type="submit" disabled={state === "loading"} className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-accent font-semibold text-white transition-transform active:scale-[0.98]">
+      {error && <p className="text-sm text-red-300">{error}</p>}
+      <button type="submit" disabled={state === "loading"} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent font-semibold text-ink transition-transform active:scale-[0.98]">
         {state === "loading" && <Loader2 className="size-4 animate-spin" />} Reserve {f.seats > 1 ? `${f.seats} spots` : "my spot"}
       </button>
     </form>
