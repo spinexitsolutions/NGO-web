@@ -22,7 +22,7 @@ export async function POST(req: Request, { params }: Ctx) {
   const body = (await req.json()) as Record<string, unknown>;
   const item = await mutate((db) => {
     const list = db[name] as unknown as Record<string, unknown>[];
-    const created = { ...body, id: (body.id as string) || uid(PREFIX[name]) };
+    const created: Record<string, unknown> = { ...body, id: (body.id as string) || uid(PREFIX[name]) };
     if (!created.createdAt && ["donors", "donations", "volunteers", "messages", "subscribers", "registrations"].includes(name)) {
       created.createdAt = new Date().toISOString();
     }
